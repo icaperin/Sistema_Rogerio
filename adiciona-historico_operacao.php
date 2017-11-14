@@ -1,15 +1,12 @@
 <?php
       include("conecta.php");
-      include("controle-historico.php");
+      include("controle-historico_operacao.php");
  ?>
 
 
 <?php
-	$data_historico = $_POST["data_historico"];
-	$descricao = $_POST["descricao"];
 
-
-if(insereHistorico($conexao, $data_historico, $descricao)) { ?>
+if(insereHistorico($conexao, $rua, $numero, $bairro, $complemento, $cep)) { ?>
 
 <?php } else {
     $msg = mysqli_error($conexao);

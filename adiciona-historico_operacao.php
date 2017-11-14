@@ -8,7 +8,7 @@
 
 
 
-if(insereHistorico($conexao, $data_historico, $descricao)) { ?>
+if(insereHistorico($id_op, $id_funcionario, $data_historcio, $descricao_historico) { ?>
 
 <?php } else {
     $msg = mysqli_error($conexao);

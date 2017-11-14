@@ -1,9 +1,26 @@
 <?php
+function insereHistorico($id_op, $id_funcionario, $data_historcio, $descricao_historico) {
 
-function insereOpHistorico($conexao, $id_op, $id_funcionario, $data_historcio, $descricao_historico) {
-	$queryInsereHistorico = "insert into historico (funcionario_id_funcionario, operacao_id_operacao, data_historico, descricao)
-  values ('{$id_funcionario}', '{$id_op}', '{$data_historcio}', '{$descricao_historico}')";
-	mysqli_query($conexao, $queryInsereHistorico);
+try {
+  $dbh = new PDO('localhost', 'root', '', 'bd_estoque',
+      array(PDO::ATTR_PERSISTENT => true));
+  echo "conectado\n";
+} catch (Exception $e) {
+  die("Não foi possivel conectar " . $e->getMessage());
+}
+
+try {
+  $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  $dbh->beginTransaction();
+  $dbh->exec("insert into historico (funcionario_id_funcionario, operacao_id_operacao, data_historico, descricao)");
+  $dbh->commit();
+
+} catch (Exception $e) {
+  $dbh->rollBack();
+  echo "Falha ao salvar os dados: " . $e->getMessage();
+}
+
 }
 
 

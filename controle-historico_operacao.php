@@ -1,14 +1,9 @@
 <?php
 
-function insereOpHistorico($conexao, $descricao_op, $id_funcionario, $data_historcio, $descricao_historico) {
-	$queryInsereOperacao= "insert into operacao (descricao)
-	values ('{$descricao_op}')";
-	mysqli_query($conexao, $queryInsereOperacao);
-	$id_op = mysqli_insert_id($conexao);
-
+function insereOpHistorico($conexao, $id_op, $id_funcionario, $data_historcio, $descricao_historico) {
 	$queryInsereHistorico = "insert into historico (funcionario_id_funcionario, operacao_id_operacao, data_historico, descricao)
   values ('{$id_funcionario}', '{$id_op}', '{$data_historcio}', '{$descricao_historico}')";
-	mysqli_query($conexao, $queryInsereHistorico);	
+	mysqli_query($conexao, $queryInsereHistorico);
 }
 
 
